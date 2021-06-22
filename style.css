@@ -31,6 +31,7 @@
   height: 638px;
   position: relative;
   border: 1px solid black;
+  background: white;
 }
 
 #logo {
@@ -54,4 +55,8 @@
   font-family: 'Kanit', sans-serif;
   font-size: 80px;
   font-weight: 500;
+}
+
+.hack {
+  color: white;
 }
