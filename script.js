@@ -11,3 +11,12 @@ btn.addEventListener('click', () => {
         console.error('oops, something went wrong!', error);
     });
 })
+
+var qrcode = new QRCode("qr-code", {
+    text: "http://jindo.dev.naver.com/collie",
+    width: 250,
+    height: 250,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.H
+});

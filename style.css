@@ -1,10 +1,16 @@
 #card {
   width: 1004px;
   height: 638px;
-  
+  position: relative;
   border: 1px solid black;
 }
 
 #logo {
   width: 200px;
+}
+
+#qr-code {
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
