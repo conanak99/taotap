@@ -33,9 +33,15 @@
         <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
         <input v-model="url" placeholder="URL" id="url" />
 
-        <button v-on:click="exportCard">
-          Tạo thẻ
-        </button>
+        <div id="background-select">
+            <img v-bind:src="bg" v-for="bg in backgrounds" />
+        </div>
+        
+        <div>
+           <button v-on:click="exportCard">
+            Tạo thẻ
+          </button>
+        </div>
       </div>
     </div>
 
@@ -52,7 +58,6 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="/bg.js"></script>
     <script src="/script.js" defer></script>
   </body>
 </html>

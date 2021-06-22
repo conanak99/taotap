@@ -67,3 +67,14 @@
 #form-card {
   margin: 20px 0;
 }
+
+#background-select {
+  display: flex;
+  margin: 20px 0;
+}
+
+#background-select img {
+  width: 200px;
+  border: 1px solid black;
+  margin-right: 10px;
+}
