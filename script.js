@@ -5,7 +5,7 @@ const app = new Vue({
     url: "https://linktr.ee/codedao",
     qrCode: undefined,
     backgrounds: [],
-    background: 'white'
+    background: "white"
   },
   mounted: async function() {
     const qrCode = new QRCode("qr-code", {
@@ -14,10 +14,18 @@ const app = new Vue({
       height: 275
     });
     this.qrCode = qrCode;
-    
-    const backgrounds = await fetch('/backgrounds.json').then(res => res.json())
-    this.backgrounds = backgrounds
-    this.background = backgrounds[0]
+
+    const backgrounds = await fetch("/backgrounds.json").then(res =>
+      res.json()
+    );
+    this.backgrounds = backgrounds;
+    this.background = backgrounds[0];
+  },
+  watch: {
+    url: function(value) {
+      this.qrCode.clear();
+      this.qrCode.makeCode(value);
+    }
   },
   methods: {
     exportCard: async () => {
@@ -32,8 +40,8 @@ const app = new Vue({
       link.href = dataUrl;
       link.click();
     },
-    setBackground: function (bg) {
-      this.background = bg
+    setBackground: function(bg) {
+      this.background = bg;
     }
   }
 });
