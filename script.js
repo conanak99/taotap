@@ -10,8 +10,8 @@ const app = new Vue({
   mounted: async function() {
     const qrCode = new QRCode("qr-code", {
       text: this.url,
-      width: 300,
-      height: 300
+      width: 275,
+      height: 275
     });
     this.qrCode = qrCode;
     
