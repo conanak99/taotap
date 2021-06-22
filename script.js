@@ -22,3 +22,24 @@ var qrcode = new QRCode("qr-code", {
     width: 300,
     height: 300
 });
+
+function getBase64(src) {
+    console.log('urlurlurlurl', src);
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.crossOrigin = 'Anonymous'; // 允许跨域
+      img.onload = () => {
+        var width = img.naturalWidth;
+        var height = img.naturalHeight;
+        var canvas = $('<canvas width="' + width + '" height="' + height + '"></canvas>')[0];
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height, 0, 0, width, height);
+        resolve(canvas.toDataURL());
+      };
+      img.onerror = err => {
+        console.error('图片转base64失败！');
+        reject(err);
+      };
+      img.src = src;
+    });
+  }

@@ -37,9 +37,9 @@
 
 #logo {
   position: absolute;
-  right: 30px;
-  left: 0px;
-  width: 300px;
+  top: 30px;
+  left: 30px;
+  width: 250px;
 }
 
 #qr-code {
@@ -52,7 +52,7 @@
   position: absolute;
   margin: 0;
   bottom: 15px;
-  left: 30px;
+  left: 35px;
   font-family: 'Kanit', sans-serif;
   font-size: 80px;
   font-weight: 500;
