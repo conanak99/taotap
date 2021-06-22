@@ -43,6 +43,17 @@
   background-size: cover;
 }
 
+#overlay {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: black;
+  width: 100%;
+  height: 100%;
+  opacity: 0.25;
+}
+
 #logo {
   position: absolute;
   top: 30px;
@@ -62,13 +73,15 @@
   margin: 0;
   bottom: 15px;
   left: 35px;
-  font-family: "Kanit", sans-serif;
+  font-family: "Verdana", sans-serif;
   font-size: 100px;
   font-weight: 500;
   color: white;
+  -webkit-text-stroke: 2px black;
 }
 
 .hack {
+  -webkit-text-stroke: none;
   color: transparent;
 }
 
@@ -78,7 +91,7 @@
 
 #background-select {
   display: flex;
-  margin: 20px 0;
+  margin: 10px 0 20px;
 }
 
 #background-select img {
