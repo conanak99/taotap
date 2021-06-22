@@ -30,8 +30,9 @@
   width: 1004px;
   height: 638px;
   position: relative;
-  border: 1px solid black;
   background: white;
+  background-image: url("https://wallpaperaccess.com/full/2530979.jpg");
+  background-size: cover;
 }
 
 #logo {
@@ -55,8 +56,9 @@
   font-family: 'Kanit', sans-serif;
   font-size: 80px;
   font-weight: 500;
+  color: white;
 }
 
 .hack {
-  color: white;
+  color: transparent;
 }
