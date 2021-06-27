@@ -60,7 +60,7 @@ const app = new Vue({
       document.body.appendChild(img);
 
       const link = document.createElement("a");
-      link.download = "taotap-card.jpeg";
+      link.download = "taotap-card.png";
       link.href = dataUrl;
       link.click();
     },
@@ -73,7 +73,11 @@ const app = new Vue({
       img.src = dataUrl;
 
       const doc = new jsPDF();
-      doc.addImage(img, 'JPEG', 20, 20, 8.5, 5.4)
+      const RATIO = 1.01
+      const WIDTH = 85 * RATIO
+      const HEIGHT = 54 * RATIO
+      doc.addImage(img, 'JPEG', 10, 10, WIDTH, HEIGHT)
+      doc.addImage(img, 'JPEG', 10, 70, WIDTH, HEIGHT)
       doc.save("taotap.pdf");
     },
     setBackground: function(bg) {

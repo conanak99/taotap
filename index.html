@@ -39,9 +39,6 @@
       </div>
 
       <div id="form-card">
-        <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
-        <input v-model="url" placeholder="URL" id="url" />
-
         <div id="background-select">
           <img
             v-bind:src="bg"
@@ -49,6 +46,12 @@
             v-on:click="setBackground(bg)"
           />
         </div>
+        
+        <div>
+           <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
+        <input v-model="url" placeholder="URL" id="url" />
+        </div>
+       <br/>
 
         <div>
           <button v-on:click="exportCard">
