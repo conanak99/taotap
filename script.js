@@ -1,17 +1,28 @@
-const toDataURL = url => fetch(url)
-  .then(response => response.blob())
-  .then(blob => new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.onloadend = () => resolve(reader.result)
-    reader.onerror = reject
-    reader.readAsDataURL(blob)
-  }))
+const toDataURL = url =>
+  fetch(url)
+    .then(response => response.blob())
+    .then(
+      blob =>
+        new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.onerror = reject;
+          reader.readAsDataURL(blob);
+        })
+    );
 
-const getBackground = () => {
+const getBackgrounds = () => {
   const backgrounds = [
-    ''
-  ]
-}
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F1.jpg?v=1624806666676",
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F2.jpg?v=1624806671981",
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F3.jpg?v=1624806699166",
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F4.jpg?v=1624806704706",
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F5.jpg?v=1624806707766",
+    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F6.jpg?v=1624806710754"
+  ];
+
+  return Promise.all(backgrounds.map(bg => toDataURL(bg)));
+};
 
 const app = new Vue({
   el: "#app",
@@ -30,9 +41,7 @@ const app = new Vue({
     });
     this.qrCode = qrCode;
 
-    const backgrounds = await fetch("/backgrounds.json").then(res =>
-      res.json()
-    );
+    const backgrounds = await getBackgrounds();
     this.backgrounds = backgrounds;
     this.background = backgrounds[0];
   },
@@ -54,6 +63,18 @@ const app = new Vue({
       link.download = "taotap-card.jpeg";
       link.href = dataUrl;
       link.click();
+    },
+    exportPDF: async () => {
+      const { jsPDF } = window.jspdf;
+
+      const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
+
+      const img = new Image();
+      img.src = dataUrl;
+
+      const doc = new jsPDF();
+      doc.addImage(img, 'JPEG', 20, 20, 8.5, 5.4)
+      doc.save("taotap.pdf");
     },
     setBackground: function(bg) {
       this.background = bg;

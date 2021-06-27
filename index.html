@@ -9,14 +9,21 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="shortcut icon" type="image/jpg" href="https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Ffavicon.png?v=1624373448629"/>
+    <link
+      rel="shortcut icon"
+      type="image/jpg"
+      href="https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Ffavicon.png?v=1624373448629"
+    />
     <!-- Import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css" />
     <title>Tao Táp - Gặp ai cũng Táp</title>
   </head>
   <body>
     <div id="app">
-      <div id="card" v-bind:style="{ 'background-image': 'url(' + background + ')' }">
+      <div
+        id="card"
+        v-bind:style="{ 'background-image': 'url(' + background + ')' }"
+      >
         <div id="overlay"></div>
         <img
           src="https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Fwhite-logo.png?v=1624366965601"
@@ -24,7 +31,7 @@
         />
 
         <div id="qr-code"></div>
-        
+
         <p id="name">
           <span id="name-content">{{name}}</span>
           <span class="hack">_</span>
@@ -36,17 +43,30 @@
         <input v-model="url" placeholder="URL" id="url" />
 
         <div id="background-select">
-            <img v-bind:src="bg" v-for="bg in backgrounds" v-on:click="setBackground(bg)" />
+          <img
+            v-bind:src="bg"
+            v-for="bg in backgrounds"
+            v-on:click="setBackground(bg)"
+          />
         </div>
-        
+
         <div>
-           <button v-on:click="exportCard">
-            Tạo thẻ
+          <button v-on:click="exportCard">
+            Tạo thẻ (Ảnh)
+          </button>
+          <button v-on:click="exportPDF">
+            Tạo thẻ (PDF)
           </button>
         </div>
       </div>
     </div>
 
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"
+      integrity="sha512-VKjwFVu/mmKGk0Z0BxgDzmn10e590qk3ou/jkmRugAkSTMSIRkd4nEnk+n7r5WBbJquusQEQjBidrBD3IQQISQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js"
       integrity="sha512-is1ls2rgwpFZyixqKFEExPHVUUL+pPkBEPw47s/6NDQ4n1m6T/ySeDW3p54jp45z2EJ0RSOgilqee1WhtelXfA=="
