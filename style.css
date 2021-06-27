@@ -1,6 +1,10 @@
+:root {
+  --padding: 50px;
+}
+
 #card {
-  width: 1004px;
-  height: 638px;
+  width: 1100px;
+  height: 700px;
   position: relative;
   background-size: cover;
 }
@@ -18,23 +22,23 @@
 
 #logo {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: var(--padding);
+  left: var(--padding);
   width: 250px;
 }
 
 #qr-code {
   position: absolute;
-  right: 30px;
-  top: 30px;
+  right: var(--padding);
+  top: var(--padding);
   border: 15px solid white;
 }
 
 #name {
   position: absolute;
   margin: 0;
-  bottom: 15px;
-  left: 35px;
+  bottom: calc(var(--padding) - 5px);
+  left: calc(var(--padding) + 5px);
   font-family: "Tahoma", sans-serif;
   font-size: 95px;
   font-weight: 600;
