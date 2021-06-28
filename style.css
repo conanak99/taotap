@@ -62,7 +62,7 @@ h5 {
 #background-select {
   display: flex;
   flex-wrap: wrap;
-  margin: 10px 0;
+  margin: 10px 0 0;
 }
 
 #background-select img {
@@ -71,6 +71,7 @@ h5 {
   margin: 0 8px 8px 0;
   opacity: 0.75;
   cursor: pointer;
+  object-fit: cover;
 }
 
 #background-select img:hover {
