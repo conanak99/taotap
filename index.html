@@ -42,9 +42,9 @@
 
       <div id="form-card">
         <div>
-          <h5>Logo</h5>
+          <h5>1. Logo</h5>
           <div>
-            <label>Đổi logo (Ảnh PNG trong suốt, size > 250px) </label>
+            <label>Đổi logo (Ảnh PNG trong suốt, size &gt; 250px) </label>
             <input type="file" @change="changeLogo" accept="image/*" />
             <button accept="image/*" v-on:click="showLogo = !showLogo">
               Ẩn/Hiện Logo
@@ -54,7 +54,7 @@
         </div>
 
         <div>
-          <h5>Ảnh nền</h5>
+          <h5>2. Ảnh nền</h5>
           <div id="background-select">
             <img
               v-bind:src="bg"
@@ -62,25 +62,31 @@
               v-on:click="setBackground(bg)"
             />
           </div>
-          <label>Đổi ảnh nền (Ảnh tỷ lệ 11:7, size > 1100px x 700px) </label>
+          <label>Đổi ảnh nền (Ảnh tỷ lệ 11:7, size &gt; 1100px X 700px) </label>
           <input type="file" @change="changeCustomBg" accept="image/*" />
         </div>
 
         <div>
-          <h5>Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
+          <h5>3. Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
           <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
           <input v-model="url" placeholder="URL" id="url" />
           <button v-on:click="fontSize -=2">Thu nhỏ chữ</button>
         </div>
-        <br />
 
         <div>
+          <h5>4. Xuất file</h5>
           <button v-on:click="exportCard">
             Tạo thẻ (Ảnh)
           </button>
           <button v-on:click="exportPDF">
             Tạo thẻ (PDF)
           </button>
+          
+          <p>
+            Nếu xuất file ảnh, các bạn in màu với <b>độ phân giải 300dpi</b> sẽ được ảnh <b>tầm 8.7cm x 5.5cm</b>. <br/> 
+            Nếu xuất file PDF thì đem đi màu A4 là ok. <br/>
+            Dán ảnh này lên thẻ NFC trắng <b>(8.55cm X 5.4cm)</b> là được nhé!
+          </p>
         </div>
       </div>
     </div>

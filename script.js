@@ -97,8 +97,8 @@ const app = new Vue({
       img.src = dataUrl;
 
       const doc = new jsPDF();
-      const RATIO = 1.01;
-      const WIDTH = 85 * RATIO;
+      const RATIO = 1.02;
+      const WIDTH = 85.5 * RATIO;
       const HEIGHT = 54 * RATIO;
       doc.addImage(img, "JPEG", 10, 10, WIDTH, HEIGHT);
       doc.addImage(img, "JPEG", 10, 70, WIDTH, HEIGHT);
