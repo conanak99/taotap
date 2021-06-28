@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/style.css" />
     <title>Tao Táp - Gặp ai cũng Táp</title>
   </head>
+
   <body>
     <div id="app">
       <div
@@ -25,33 +26,53 @@
         v-bind:style="{ 'background-image': 'url(' + background + ')' }"
       >
         <div id="overlay"></div>
-        <img
-          src="https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Fwhite-logo.png?v=1624366965601"
-          id="logo"
-        />
+        <img v-if="showLogo" v-bind:src="logo" id="logo" />
 
         <div id="qr-code"></div>
 
         <p id="name">
-          <span id="name-content">{{name}}</span>
+          <span
+            v-bind:style="{ 'font-size': fontSize + 'px' }"
+            id="name-content"
+            >{{name}}</span
+          >
           <span class="hack">_</span>
         </p>
       </div>
 
       <div id="form-card">
-        <div id="background-select">
-          <img
-            v-bind:src="bg"
-            v-for="bg in backgrounds"
-            v-on:click="setBackground(bg)"
-          />
-        </div>
-        
         <div>
-           <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
-        <input v-model="url" placeholder="URL" id="url" />
+          <h5>Logo</h5>
+          <div>
+            <label>Đổi logo (Ảnh PNG trong suốt, size > 250px) </label>
+            <input type="file" @change="changeLogo" accept="image/*" />
+            <button accept="image/*" v-on:click="showLogo = !showLogo">
+              Ẩn/Hiện Logo
+            </button>
+            <br />
+          </div>
         </div>
-       <br/>
+
+        <div>
+          <h5>Ảnh nền</h5>
+          <div id="background-select">
+            <img
+              v-bind:src="bg"
+              v-for="bg in backgrounds"
+              v-on:click="setBackground(bg)"
+            />
+          </div>
+          <label>Đổi ảnh nền (Ảnh tỷ lệ 11:7, size > 1100px x 700px) </label>
+          <input type="file" @change="changeCustomBg" accept="image/*" />
+        </div>
+
+        <div>
+          <h5>Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
+          <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
+          <input v-model="url" placeholder="URL" id="url" />
+          <button v-on:click="fontSize -=2">Thu nhỏ chữ</button>
+        </div>
+        <br />
 
         <div>
           <button v-on:click="exportCard">

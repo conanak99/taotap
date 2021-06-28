@@ -11,6 +11,17 @@ const toDataURL = url =>
         })
     );
 
+const readFile = file => {
+  return new Promise((resolve, reject) => {
+    const fr = new FileReader();
+    fr.onerror = reject;
+    fr.onload = function() {
+      resolve(fr.result);
+    };
+    fr.readAsDataURL(file);
+  });
+};
+
 const getBackgrounds = () => {
   const backgrounds = [
     "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F1.jpg?v=1624806666676",
@@ -29,9 +40,13 @@ const app = new Vue({
   data: {
     name: "Phạm Huy Hoàng",
     url: "https://linktr.ee/codedao",
-    qrCode: undefined,
     backgrounds: [],
-    background: "white"
+    background: "white",
+    showLogo: true,
+    logo:
+      "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Fwhite-logo.png?v=1624366965601",
+    fontSize: 85,
+    qrCode: undefined
   },
   mounted: async function() {
     const qrCode = new QRCode("qr-code", {
@@ -52,6 +67,15 @@ const app = new Vue({
     }
   },
   methods: {
+    changeLogo: async function(event) {
+      const file = event.target.files[0];
+      this.logo = await readFile(file);
+    },
+    changeCustomBg: async function(event) {
+      const file = event.target.files[0];
+      this.background = await readFile(file);
+      this.backgrounds.push(this.background);
+    },
     exportCard: async () => {
       const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
 
@@ -73,11 +97,11 @@ const app = new Vue({
       img.src = dataUrl;
 
       const doc = new jsPDF();
-      const RATIO = 1.01
-      const WIDTH = 85 * RATIO
-      const HEIGHT = 54 * RATIO
-      doc.addImage(img, 'JPEG', 10, 10, WIDTH, HEIGHT)
-      doc.addImage(img, 'JPEG', 10, 70, WIDTH, HEIGHT)
+      const RATIO = 1.01;
+      const WIDTH = 85 * RATIO;
+      const HEIGHT = 54 * RATIO;
+      doc.addImage(img, "JPEG", 10, 10, WIDTH, HEIGHT);
+      doc.addImage(img, "JPEG", 10, 70, WIDTH, HEIGHT);
       doc.save("taotap.pdf");
     },
     setBackground: function(bg) {
