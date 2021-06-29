@@ -54,23 +54,23 @@
             <button v-on:click="showLogo = !showLogo">
               Ẩn/Hiện Logo
             </button>
-            <button v-on:click="logoSize -= 5">
+            <button v-on:click="logoSize -= 10">
               - Thu nhỏ
             </button>
-            <button v-on:click="logoSize += 5">
+            <button v-on:click="logoSize += 10">
               + Phóng to
             </button>
           </div>
         </div>
 
         <div>
-          <h5>2. QR Code</h5>
+          <h5>2. QR Code (Dùng linktree hoặc instabio hoặc web tự code)</h5>
           <div>
             <input v-model="url" placeholder="URL" id="url" />
-            <button v-on:click="updateQR(-5)">
+            <button v-on:click="updateQR(-10)">
               - Thu nhỏ
             </button>
-            <button v-on:click="updateQR(5)">
+            <button v-on:click="updateQR(10)">
               + Phóng to
             </button>
           </div>

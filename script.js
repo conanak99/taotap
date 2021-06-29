@@ -68,11 +68,7 @@ const app = new Vue({
   watch: {
     url: function(value) {
       this.qrCode.clear();
-      this.qrCode.makeCode()"qr-code", {
-        text: this.url,
-        width: this.qrSize,
-        height: this.qrSize
-      });
+      this.qrCode.makeCode(value);
     }
   },
   methods: {
@@ -86,8 +82,16 @@ const app = new Vue({
       this.backgrounds.push(this.background);
     },
     updateQR: function(change) {
+      if (this.qrSize <= 100 && change < 0) {
+        return
+      } 
+      if (this.qrSize >= 500 && change > 0) {
+        return
+      }
+      
       this.qrSize += change;
-      this.qrCode.clear();
+      // Lol hack
+      document.querySelector('#qr-code').innerHTML = ''
       this.qrCode = new QRCode("qr-code", {
         text: this.url,
         width: this.qrSize,
