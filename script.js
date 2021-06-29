@@ -38,21 +38,26 @@ const getBackgrounds = () => {
 const app = new Vue({
   el: "#app",
   data: {
-    name: "Phạm Huy Hoàng",
-    url: "https://linktr.ee/codedao",
-    backgrounds: [],
-    background: "white",
     showLogo: true,
     logo:
       "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Fwhite-logo.png?v=1624366965601",
+    logoSize: 250,
+
+    url: "https://linktr.ee/codedao",
+    qrCode: undefined,
+    qrSize: 275,
+
+    name: "Phạm Huy Hoàng",
     fontSize: 85,
-    qrCode: undefined
+
+    backgrounds: [],
+    background: "white"
   },
   mounted: async function() {
     const qrCode = new QRCode("qr-code", {
       text: this.url,
-      width: 275,
-      height: 275
+      width: this.qrSize,
+      height: this.qrSize
     });
     this.qrCode = qrCode;
 
@@ -63,7 +68,11 @@ const app = new Vue({
   watch: {
     url: function(value) {
       this.qrCode.clear();
-      this.qrCode.makeCode(value);
+      this.qrCode.makeCode()"qr-code", {
+        text: this.url,
+        width: this.qrSize,
+        height: this.qrSize
+      });
     }
   },
   methods: {
@@ -75,6 +84,15 @@ const app = new Vue({
       const file = event.target.files[0];
       this.background = await readFile(file);
       this.backgrounds.push(this.background);
+    },
+    updateQR: function(change) {
+      this.qrSize += change;
+      this.qrCode.clear();
+      this.qrCode = new QRCode("qr-code", {
+        text: this.url,
+        width: this.qrSize,
+        height: this.qrSize
+      });
     },
     exportCard: async () => {
       const dataUrl = await domtoimage.toPng(document.querySelector("#card"));

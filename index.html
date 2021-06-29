@@ -26,7 +26,12 @@
         v-bind:style="{ 'background-image': 'url(' + background + ')' }"
       >
         <div id="overlay"></div>
-        <img v-if="showLogo" v-bind:src="logo" id="logo" />
+        <img
+          v-if="showLogo"
+          v-bind:src="logo"
+          v-bind:style="{ 'width': logoSize + 'px' }"
+          id="logo"
+        />
 
         <div id="qr-code"></div>
 
@@ -46,15 +51,33 @@
           <div>
             <label>Đổi logo (Ảnh PNG trong suốt, size &gt; 250px) </label>
             <input type="file" @change="changeLogo" accept="image/*" />
-            <button accept="image/*" v-on:click="showLogo = !showLogo">
+            <button v-on:click="showLogo = !showLogo">
               Ẩn/Hiện Logo
             </button>
-            <br />
+            <button v-on:click="logoSize -= 5">
+              - Thu nhỏ
+            </button>
+            <button v-on:click="logoSize += 5">
+              + Phóng to
+            </button>
           </div>
         </div>
 
         <div>
-          <h5>2. Ảnh nền</h5>
+          <h5>2. QR Code</h5>
+          <div>
+            <input v-model="url" placeholder="URL" id="url" />
+            <button v-on:click="updateQR(-5)">
+              - Thu nhỏ
+            </button>
+            <button v-on:click="updateQR(5)">
+              + Phóng to
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <h5>3. Ảnh nền</h5>
           <div id="background-select">
             <img
               v-bind:src="bg"
@@ -67,14 +90,19 @@
         </div>
 
         <div>
-          <h5>3. Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
+          <h5>4. Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
           <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
-          <input v-model="url" placeholder="URL" id="url" />
-          <button v-on:click="fontSize -=2">Thu nhỏ chữ</button>
+
+          <button v-on:click="fontSize -= 2">
+            - Thu nhỏ
+          </button>
+          <button v-on:click="fontSize += 2">
+            + Phóng to
+          </button>
         </div>
 
         <div>
-          <h5>4. Xuất file</h5>
+          <h5>5. Xuất file</h5>
           <button v-on:click="exportCard">
             Tạo thẻ (Ảnh)
           </button>
