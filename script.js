@@ -122,14 +122,12 @@ const app = new Vue({
       const RATIO = 1.02;
       const WIDTH = 85.5 * RATIO;
       const HEIGHT = 54 * RATIO;
-      doc.addImage(img, "JPEG", 10, 10, WIDTH, HEIGHT);
-      doc.addImage(img, "JPEG", 10, 70, WIDTH, HEIGHT);
-      
-      console.log(doc.getFontList())
+      doc.addImage(img, "JPEG", 15, 15, WIDTH, HEIGHT);
+      doc.addImage(img, "JPEG", 15, 90, WIDTH, HEIGHT);
       
       doc.setFontSize(16)
       doc.setFont('courier', "bold")
-      doc.text(`Chon "Fit to Paper khi in nhe :3" `, 10, 150)
+      doc.text(`Chon "Fit to Paper" khi in nhe :3.`, 15, 160)
       
       doc.setLineWidth(3)
       doc.line(0,0, 210, 0)
