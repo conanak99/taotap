@@ -1,10 +1,14 @@
 :root {
   --padding: 60px;
+}
+
+body * {
   font-family: "Tahoma", sans-serif;
 }
 
 h5 {
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 
 #card {
@@ -44,7 +48,7 @@ h5 {
   margin: 0;
   bottom: calc(var(--padding) - 10px);
   left: calc(var(--padding) + 5px);
-  font-family: "Oswald", sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 85px;
   font-weight: 500;
   color: white;
