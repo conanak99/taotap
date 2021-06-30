@@ -15,6 +15,7 @@
       href="https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Ffavicon.png?v=1624373448629"
     />
     <!-- Import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/font.css" />
     <link rel="stylesheet" href="/style.css" />
     <title>Tao Táp - Gặp ai cũng Táp</title>
   </head>
@@ -37,7 +38,7 @@
 
         <p id="name">
           <span
-            v-bind:style="{ 'font-size': fontSize + 'px' }"
+            v-bind:style="{ 'font-size': fontSize + 'px', 'font-family': font }"
             id="name-content"
             >{{name}}</span
           >
@@ -64,7 +65,12 @@
         </div>
 
         <div>
-          <h5>2. QR Code (Dùng <a href="https://linktr.ee" target="_blank">linktree</a> hoặc <a href="https://instabio.cc" target="_blank">instabio</a> hoặc web tự code)</h5>
+          <h5>
+            2. QR Code (Dùng
+            <a href="https://linktr.ee" target="_blank">linktree</a> hoặc
+            <a href="https://instabio.cc" target="_blank">instabio</a> hoặc web
+            tự code)
+          </h5>
           <div>
             <input v-model="url" placeholder="URL" id="url" />
             <button v-on:click="updateQR(-10)">
@@ -92,6 +98,9 @@
         <div>
           <h5>4. Thông tin thẻ (Tên dài quá có thể thu nhỏ chữ)</h5>
           <input v-model="name" placeholder="Tên trên thẻ" id="txt-name" />
+          <select v-model="font">
+            <option v-for="fnt in fonts" :value="fnt">Font: {{fnt}}</option>
+          </select>
 
           <button v-on:click="fontSize -= 2">
             - Thu nhỏ
@@ -113,7 +122,8 @@
           <p>
             Nếu xuất file ảnh, các bạn in màu với <b>độ phân giải 300dpi</b> sẽ
             được ảnh <b>tầm 8.7cm x 5.5cm</b>. <br />
-            Nếu xuất file PDF thì đem đi màu A4, chọn <b>Fit to Paper</b> khi in là ok. <br />
+            Nếu xuất file PDF thì đem đi màu A4, chọn <b>Fit to Paper</b> khi in
+            là ok. <br />
             Dán ảnh này lên thẻ NFC trắng <b>(8.55cm X 5.4cm)</b> là được nhé!
           </p>
         </div>

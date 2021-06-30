@@ -35,6 +35,17 @@ const getBackgrounds = () => {
   return Promise.all(backgrounds.map(bg => toDataURL(bg)));
 };
 
+const fonts = [
+  "Kanit",
+  "Oswald",
+  "Prompt",
+  "Roboto",
+  "Roboto Slab",
+  "Lora",
+  "Verdana",
+  "Tahoma"
+];
+
 const app = new Vue({
   el: "#app",
   data: {
@@ -49,6 +60,8 @@ const app = new Vue({
 
     name: "Phạm Huy Hoàng",
     fontSize: 85,
+    fonts: fonts,
+    font: fonts[0],
 
     backgrounds: [],
     background: "white"
@@ -83,15 +96,15 @@ const app = new Vue({
     },
     updateQR: function(change) {
       if (this.qrSize <= 100 && change < 0) {
-        return
-      } 
-      if (this.qrSize >= 500 && change > 0) {
-        return
+        return;
       }
-      
+      if (this.qrSize >= 500 && change > 0) {
+        return;
+      }
+
       this.qrSize += change;
       // Lol hack
-      document.querySelector('#qr-code').innerHTML = ''
+      document.querySelector("#qr-code").innerHTML = "";
       this.qrCode = new QRCode("qr-code", {
         text: this.url,
         width: this.qrSize,
@@ -99,6 +112,7 @@ const app = new Vue({
       });
     },
     exportCard: async () => {
+      await domtoimage.toPng(document.querySelector("#card")); // Lol font only work in 2nd times
       const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
 
       const img = new Image();
@@ -113,6 +127,7 @@ const app = new Vue({
     exportPDF: async () => {
       const { jsPDF } = window.jspdf;
 
+      await domtoimage.toPng(document.querySelector("#card")); // Lol font only work in 2nd times
       const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
 
       const img = new Image();
@@ -124,16 +139,16 @@ const app = new Vue({
       const HEIGHT = 54 * RATIO;
       doc.addImage(img, "JPEG", 15, 15, WIDTH, HEIGHT);
       doc.addImage(img, "JPEG", 15, 90, WIDTH, HEIGHT);
-      
-      doc.setFontSize(16)
-      doc.setFont('courier', "bold")
-      doc.text(`Chon "Fit to Paper" khi in nhe :3.`, 15, 160)
-      
-      doc.setLineWidth(3)
-      doc.line(0,0, 210, 0)
-      doc.line(0,0, 0, 297)
-      doc.line(210,0, 210, 297)
-      doc.line(0,297, 210, 297)
+
+      doc.setFontSize(16);
+      doc.setFont("courier", "bold");
+      doc.text(`Chon "Fit to Paper" khi in nhe :3.`, 15, 160);
+
+      doc.setLineWidth(3);
+      doc.line(0, 0, 210, 0);
+      doc.line(0, 0, 0, 297);
+      doc.line(210, 0, 210, 297);
+      doc.line(0, 297, 210, 297);
       doc.save("taotap.pdf");
     },
     setBackground: function(bg) {

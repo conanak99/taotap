@@ -44,9 +44,9 @@ h5 {
   margin: 0;
   bottom: calc(var(--padding) - 10px);
   left: calc(var(--padding) + 5px);
-  font-family: "Tahoma", sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 85px;
-  font-weight: 600;
+  font-weight: 500;
   color: white;
   -webkit-text-stroke: 2px black;
 }
