@@ -1,21 +1,21 @@
 const toDataURL = url =>
   fetch(url)
-    .then(response => response.blob())
-    .then(
-      blob =>
-        new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onloadend = () => resolve(reader.result);
-          reader.onerror = reject;
-          reader.readAsDataURL(blob);
-        })
-    );
+  .then(response => response.blob())
+  .then(
+    blob =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve(reader.result);
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    })
+  );
 
 const readFile = file => {
   return new Promise((resolve, reject) => {
     const fr = new FileReader();
     fr.onerror = reject;
-    fr.onload = function() {
+    fr.onload = function () {
       resolve(fr.result);
     };
     fr.readAsDataURL(file);
@@ -24,12 +24,7 @@ const readFile = file => {
 
 const getBackgrounds = () => {
   const backgrounds = [
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F1.jpg?v=1624806666676",
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F2.jpg?v=1624806671981",
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F3.jpg?v=1624806699166",
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F4.jpg?v=1624806704706",
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F5.jpg?v=1624806707766",
-    "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2F6.jpg?v=1624806710754"
+    "/imgs/1.jpeg", "/imgs/2.jpeg", "/imgs/3.jpeg", "/imgs/4.jpeg", "/imgs/5.jpeg", "/imgs/6.jpeg"
   ];
 
   return Promise.all(backgrounds.map(bg => toDataURL(bg)));
@@ -50,8 +45,7 @@ const app = new Vue({
   el: "#app",
   data: {
     showLogo: true,
-    logo:
-      "https://cdn.glitch.com/d08bb326-e251-4744-9266-f454d653c7c1%2Fwhite-logo.png?v=1624366965601",
+    logo: "/imgs/logo.png",
     logoSize: 250,
 
     url: "https://linktr.ee/codedao",
@@ -66,7 +60,7 @@ const app = new Vue({
     backgrounds: [],
     background: "white"
   },
-  mounted: async function() {
+  mounted: async function () {
     const qrCode = new QRCode("qr-code", {
       text: this.url,
       width: this.qrSize,
@@ -79,22 +73,22 @@ const app = new Vue({
     this.background = backgrounds[0];
   },
   watch: {
-    url: function(value) {
+    url: function (value) {
       this.qrCode.clear();
       this.qrCode.makeCode(value);
     }
   },
   methods: {
-    changeLogo: async function(event) {
+    changeLogo: async function (event) {
       const file = event.target.files[0];
       this.logo = await readFile(file);
     },
-    changeCustomBg: async function(event) {
+    changeCustomBg: async function (event) {
       const file = event.target.files[0];
       this.background = await readFile(file);
       this.backgrounds.push(this.background);
     },
-    updateQR: function(change) {
+    updateQR: function (change) {
       if (this.qrSize <= 100 && change < 0) {
         return;
       }
@@ -125,7 +119,9 @@ const app = new Vue({
       link.click();
     },
     exportPDF: async () => {
-      const { jsPDF } = window.jspdf;
+      const {
+        jsPDF
+      } = window.jspdf;
 
       await domtoimage.toPng(document.querySelector("#card")); // Lol font only work in 2nd times
       const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
@@ -151,7 +147,7 @@ const app = new Vue({
       doc.line(0, 297, 210, 297);
       doc.save("taotap.pdf");
     },
-    setBackground: function(bg) {
+    setBackground: function (bg) {
       this.background = bg;
     }
   }
